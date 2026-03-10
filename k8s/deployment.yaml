@@ -17,6 +17,6 @@ spec:
       containers:
         - name: rust-app
           # Image is overwritten at deploy time by the pipeline using kubectl set image
-          image: localhost:5001/rust-app:latest
+          image: kind-registry:5000/rust-app:latest
           ports:
             - containerPort: 8080
