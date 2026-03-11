@@ -16,7 +16,17 @@ spec:
     spec:
       containers:
         - name: rust-app
-          # Image is overwritten at deploy time by the pipeline using kubectl set image
           image: kind-registry:5000/rust-app:latest
+          imagePullPolicy: Always    # always pull fresh image, never use node cache
           ports:
             - containerPort: 8080
+          readinessProbe:            # pod only gets traffic when this passes
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:             # restart pod if this fails
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
