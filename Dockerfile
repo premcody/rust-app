@@ -1,7 +1,7 @@
 # ── Stage 1: Build ──────────────────────────────────────────────────────────
 # Uses the official Rust image only for compiling. This layer is discarded
 # in the final image — no Rust toolchain ships to production.
-FROM docker.io/library/rust:1.76-slim AS builder
+FROM docker.io/library/rust:1.89-slim AS builder
 
 WORKDIR /app
 
