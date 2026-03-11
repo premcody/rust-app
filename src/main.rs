@@ -8,7 +8,7 @@ fn main() {
     for stream in listener.incoming() {
         let mut stream = stream.expect("Failed to accept connection");
         let mut buffer = [0; 512];
-        stream.read(&mut buffer).unwrap_or(0);
+        let _ = stream.read(&mut buffer);
 
         let response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello from Rust CI pipeline on OpenShift!\n";
         stream.write_all(response.as_bytes()).unwrap_or(());
